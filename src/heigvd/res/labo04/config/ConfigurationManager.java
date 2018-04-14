@@ -121,7 +121,7 @@ public class ConfigurationManager {
         String output = "";
         output += "SMTP Server address and port: " + smtpServerAddress + ":" + smtpServerPort + "\n";
         output += "Number of senders           : " + numberOfSenders + "\n";
-        output += "Number of recievers         : " + numberOfSenders + "\n";
+        output += "Number of recievers         : " + numberOfRecievers + "\n";
 
         return output;
     }
