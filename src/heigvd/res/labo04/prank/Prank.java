@@ -1,4 +1,7 @@
 package heigvd.res.labo04.prank;
 
-public class prank {
+import heigvd.res.labo04.model.Mail;
+
+public class Prank{
+
 }

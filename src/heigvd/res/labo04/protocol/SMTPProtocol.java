@@ -9,8 +9,8 @@ public final class SMTPProtocol {
     public final static int DEFAULT_PORT = 2525;
 
     public final static String CMD_HELLO = "EHLO";
-    public final static String CMD_FROM = "MAIL FROM";
-    public final static String CMD_TO = "RCPT TO";
+    public final static String CMD_FROM = "MAIL FROM:";
+    public final static String CMD_TO = "RCPT TO:";
     public final static String CMD_DATA = "DATA";
     public final static String CMD_END_MESSAGE = ".";
 

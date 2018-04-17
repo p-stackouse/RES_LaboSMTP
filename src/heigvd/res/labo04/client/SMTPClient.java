@@ -10,5 +10,5 @@ import java.io.IOException;
  *
  */
 public interface SMTPClient {
-    public void sendMail(Mail mail, ConfigurationManager config) throws IOException;
+    public void sendMail(Mail mail) throws IOException;
 }

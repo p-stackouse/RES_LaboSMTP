@@ -8,9 +8,11 @@ public class Group {
     private Person victimSenders;
     private Person cc;
 
-    Group(ArrayList<Person> victimReciever, Person victimSender, Person cc){
-        for(int i = 0; i < victimReciever.size(); ++i)
-            this.victimRecievers.add(victimReciever.get(i));
+    public Group( Person victimSender, Person cc, Person ... victimReciever){
+        victimRecievers = new ArrayList<Person>();
+
+        for(int i = 0; i < victimReciever.length; ++i)
+            this.victimRecievers.add(victimReciever[i]);
 
         this.victimSenders = victimSender;
         this.cc = cc;
