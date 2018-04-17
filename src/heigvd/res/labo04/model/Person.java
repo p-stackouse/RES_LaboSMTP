@@ -2,19 +2,23 @@ package heigvd.res.labo04.model;
 
 public class Person {
 
-    private String name;
-    private String vorName;
+    private String firstName;
+    private String lastName;
+    private String email;
 
-    public Person(String name, String vorName){
-        this.name = name;
-        this.vorName = vorName;
+    public Person(String firstName, String lastName, String email){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
     }
-
-    public void setVorName(String vorName){
-        this.vorName = vorName;
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
 }

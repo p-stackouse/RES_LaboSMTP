@@ -2,6 +2,7 @@ package heigvd.res.labo04.client;
 
 import heigvd.res.labo04.config.ConfigurationManager;
 import heigvd.res.labo04.model.Mail;
+import heigvd.res.labo04.prank.PrankGenerator;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,12 +14,11 @@ public class SMTPClientImpl implements SMTPClient{
     private Socket clientSocket;
     private BufferedReader br;
     private PrintWriter    pr;
-    private ConfigurationManager configuration;
+    private PrankGenerator prankGenerator;
 
     public void sendMail(Mail mail, ConfigurationManager config) throws IOException{
 
-        //creation of serveur
-        clientSocket  = new Socket(configuration.getSmtpServerAddress(), configuration.getSmtpServerPort());
+        clientSocket  = new Socket(prankGenerator., configuration.getSmtpServerPort());
         br            = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         pr            = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true);
         configuration = config;

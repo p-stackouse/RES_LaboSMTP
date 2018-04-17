@@ -3,7 +3,6 @@ import com.sun.media.sound.InvalidDataException;
 import heigvd.res.labo04.config.ConfigurationManager;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
@@ -15,6 +14,7 @@ public class PrankGenerator {
     private List<String> mails;
     private List<String> sendersEmails;
     private List<String> recieversEmails;
+    private String smtpServerAddress;
 
     public PrankGenerator(int requiredSenders, int requiredRecievers) throws IOException, DataFormatException{
         configManager = new ConfigurationManager(true, requiredSenders, requiredRecievers);
@@ -30,6 +30,7 @@ public class PrankGenerator {
         recieversEmails = configManager.getRecieversEmails();
         mails = configManager.getMails();
     }
+
 
     public String toString(){
         String output = "";
