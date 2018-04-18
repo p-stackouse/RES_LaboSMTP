@@ -13,6 +13,7 @@ public final class SMTPProtocol {
     public final static String CMD_TO = "RCPT TO:";
     public final static String CMD_DATA = "DATA";
     public final static String CMD_END_MESSAGE = ".";
+    public final static String CMD_QUIT = "quit";
 
     public final static String[] SUPPORTED_COMMANDS = new String[]{CMD_HELLO, CMD_FROM, CMD_TO, CMD_DATA, CMD_END_MESSAGE};
 

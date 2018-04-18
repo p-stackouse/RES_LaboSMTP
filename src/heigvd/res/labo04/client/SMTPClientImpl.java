@@ -14,6 +14,7 @@ import static jdk.nashorn.internal.objects.Global.print;
 
 public class SMTPClientImpl implements SMTPClient{
 
+    private static final String NEW_LINE = "\r";
     private Socket clientSocket;
     private BufferedReader br;
     private PrintWriter    pr;
@@ -30,62 +31,63 @@ public class SMTPClientImpl implements SMTPClient{
     public void sendMail(Mail mail) throws IOException{
 
         clientSocket  = new Socket(address, port);
+
+        pr            = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true );
+
         br            = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
-        pr            = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true);
 
         System.out.print("Start Communication\n");
 
-        String line = "";
         System.out.println(br.readLine());
+        pr.flush();
 
-        System.out.println(line);
+        String line = "";
 
         //EHLO
-        pr.print(CMD_HELLO + " " + "something" + "\r\n");
-
+        pr.println(CMD_HELLO + " " + "localhost" + NEW_LINE);
         line = br.readLine();
-        System.out.println(line);
+        pr.flush();
 
-        while (line.startsWith("250-")) {
+        while(line.startsWith("250-")){
             line = br.readLine();
             System.out.println(line);
         }
 
-        System.out.println(line);
-
         //MAIL FROM
-        pr.println(CMD_FROM + mail.getEmailAddressSender());
+        pr.println(CMD_FROM + "<" + mail.getEmailAddressSender() + ">" + NEW_LINE);
         line = br.readLine();
-
-        System.out.println(line);
+        pr.flush();
 
         //RCPT TO
-        for(int i = 0; i < mail.getSizeGroup(); ++i)
-        pr.print(CMD_TO + " " + mail.getEmailAddressReciever().get(i));
-        line = br.readLine();
-
-        System.out.println(line);
+        for(int i = 0; i < mail.getSizeGroup(); ++i) {
+            pr.println(CMD_TO + "<" + mail.getEmailAddressReciever().get(i).getEmail() + ">" + NEW_LINE);
+            line = br.readLine();
+            pr.flush();
+        }
 
         //RCPT TO
         if(mail.getCC() != null)
-        pr.println(CMD_TO + " " + mail.getCC());
+        pr.println(CMD_TO + "<" + mail.getCC().getEmail() + ">" + NEW_LINE);
         line = br.readLine();
+        pr.flush();
 
         //DATA
-        pr.println(CMD_DATA);
+        pr.println(CMD_DATA + NEW_LINE);
+        pr.flush();
         line = br.readLine();
 
-        pr.println(mail.getData());
-        line = br.readLine();
+        pr.println(mail.getData() + NEW_LINE);
+        pr.flush();
 
         //END
-        pr.println(".");
+        pr.println(CMD_END_MESSAGE + NEW_LINE);
         line = br.readLine();
+        pr.flush();
 
-
-
-
-
+        //QUIT
+        pr.println(CMD_QUIT + NEW_LINE);
+        line = br.readLine();
+        pr.flush();
 
     }
 
