@@ -26,10 +26,26 @@ public class PrankGenerator {
         if(configManager.getIsNotEnoughMessages())
             throw new InvalidDataException("Not enough messages!");
 
-        sendersEmails = configManager.getSendersEmails();
+
+        sendersEmails   = configManager.getSendersEmails();
         recieversEmails = configManager.getRecieversEmails();
-        mails = configManager.getMails();
+        mails           = configManager.getMails();
+
+
     }
+
+    public List<String> getSendersEmails() {
+        return sendersEmails;
+    }
+
+    public List<String> getRecieversEmails(){
+        return recieversEmails;
+    }
+
+    public String getSmtpServerAddress(){
+        return smtpServerAddress;
+    }
+
 
 
     public String toString(){
@@ -37,7 +53,7 @@ public class PrankGenerator {
         output += "List of senders              :" + sendersEmails + "\n";
         output += "List of senders              :" + recieversEmails + "\n";
         output += "SMTP server address and port :" + configManager.getSmtpServerAddress() + ":" +
-                configManager.getSmtpServerPort() + "\n";
+                configManager.getSmtpServerPort()  + "\n";
         output += "List of messages             :" + mails;
         return output;
 

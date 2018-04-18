@@ -16,12 +16,16 @@ public class Mail {
     private Random sendersAndReciversGenerator = new Random();
 
 
-    public Mail(Group group, String subject, String data) throws IOException, DataFormatException {
-        this.group = group;
-        this.subject = subject;
-        this.data = data;
-        groupSize = group.getVictimRecievers().size();
+    public Mail() throws IOException, DataFormatException {
         prankG = new PrankGenerator(sendersAndReciversGenerator.nextInt(3),sendersAndReciversGenerator.nextInt(3));
+    }
+
+    public Mail(Group group, String subject, String data) throws IOException, DataFormatException {
+        this.group   = group;
+        this.subject = subject;
+        this.data    = data;
+        groupSize    = group.getVictimRecievers().size();
+        prankG       = new PrankGenerator(sendersAndReciversGenerator.nextInt(3),sendersAndReciversGenerator.nextInt(3));
 
     }
 
