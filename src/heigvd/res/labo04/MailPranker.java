@@ -8,9 +8,10 @@ import heigvd.res.labo04.prank.PrankGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.zip.DataFormatException;
 
 public class MailPranker {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DataFormatException {
         Person p1 = new Person("oawhd", "aodawdo", "oaid@gmail.com");
         Person p2 = new Person("qwer", "ycvyxcv", "yxcv@gmail.com");
         Person p3 = new Person("sadfa", "yxc", "hjkh@gmail.com");
