@@ -31,10 +31,8 @@ public class SMTPClientImpl implements SMTPClient{
     public void sendMail(Mail mail) throws IOException{
 
         clientSocket  = new Socket(address, port);
-
-        pr            = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true );
-
-        br            = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
+        pr = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true );
+        br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
         System.out.print("Start Communication\n");
 
@@ -67,7 +65,7 @@ public class SMTPClientImpl implements SMTPClient{
 
         //RCPT TO
         if(mail.getCC() != null)
-        pr.println(CMD_TO + "<" + mail.getCC().getEmail() + ">" + NEW_LINE);
+            pr.println(CMD_TO + "<" + mail.getCC() + ">" + NEW_LINE);
         line = br.readLine();
         pr.flush();
 

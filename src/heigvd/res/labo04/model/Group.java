@@ -4,33 +4,53 @@ import java.util.ArrayList;
 
 public class Group {
 
-    private ArrayList<Person> victimRecievers;
-    private Person victimSenders;
+    private Person sender;
+    private ArrayList<Person> recievers;
     private Person cc;
 
+    public Group(){
+        sender = new Person();
+        recievers = new ArrayList<Person>();
+        cc = new Person();
+    }
+
     public Group( Person victimSender, Person cc, Person ... victimReciever){
-        victimRecievers = new ArrayList<Person>();
+        this();
 
         for(int i = 0; i < victimReciever.length; ++i)
-            this.victimRecievers.add(victimReciever[i]);
+            this.recievers.add(victimReciever[i]);
 
-        this.victimSenders = victimSender;
+        this.sender = victimSender;
         this.cc = cc;
     }
 
-    void addVictim(Person victim){
-        victimRecievers.add(victim);
-    }
 
-    ArrayList<Person> getVictimRecievers(){
-        return victimRecievers;
+    public ArrayList<Person> getRecievers(){
+        return recievers;
     }
-
-    Person getVictimSenders(){
-        return victimSenders;
-    }
-
-    Person getCc(){
+    public Person getSender(){ return sender; }
+    public Person getCc(){
         return cc;
+    }
+
+    public void setSender(Person sender){
+        if(sender != null){
+            this.sender = sender;
+        }
+    }
+    public void setCc(Person cc){
+        if(cc != null){
+            this.cc = cc;
+        }
+    }
+
+    public void addReciever(Person reciever){
+        if(reciever != null){
+            recievers.add(reciever);
+        }
+    }
+
+    public String toString(){
+        return sender + " " + recievers + " " + cc;
     }
 }
