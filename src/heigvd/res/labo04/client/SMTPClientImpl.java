@@ -1,22 +1,12 @@
 package heigvd.res.labo04.client;
-
-import heigvd.res.labo04.config.ConfigurationManager;
 import heigvd.res.labo04.model.Mail;
-import heigvd.res.labo04.prank.Prank;
-import heigvd.res.labo04.prank.PrankGenerator;
-import sun.rmi.runtime.Log;
-
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import static heigvd.res.labo04.protocol.SMTPProtocol.*;
 
-import static jdk.nashorn.internal.objects.Global.print;
-
-public class SMTPClientImpl implements SMTPClient{
-
+public class SMTPClientImpl implements SMTPClient {
     private static final String NEW_LINE = "\r";
     private Socket clientSocket;
     private BufferedReader br;
@@ -32,10 +22,10 @@ public class SMTPClientImpl implements SMTPClient{
 
 
     public void sendMail(Mail mail) throws IOException{
-
+        Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Starting sending mail..");
         clientSocket  = new Socket(address, port);
-
-        if(clientSocket != null) {
+        Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining socket...");
+        try{
             pr = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true);
             br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
@@ -91,8 +81,8 @@ public class SMTPClientImpl implements SMTPClient{
             pr.println(CMD_QUIT + NEW_LINE);
             line = br.readLine();
             pr.flush();
-        }else{
-            System.out.println("Couldn't connect to server " + address);
+        }catch(Exception ex){
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.SEVERE, ex.getMessage());
         }
 
     }
