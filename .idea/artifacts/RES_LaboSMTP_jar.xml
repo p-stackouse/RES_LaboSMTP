@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RES_LaboSMTP:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RES_LaboSMTP_jar</output-path>
+    <root id="archive" name="RES_LaboSMTP.jar">
+      <element id="module-output" name="RES_LaboSMTP" />
+    </root>
+  </artifact>
+</component>

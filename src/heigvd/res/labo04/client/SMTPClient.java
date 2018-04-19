@@ -7,7 +7,6 @@ import java.io.IOException;
 /**
  * This interface lists the minimal methods to implement in a SMTP client
  * @author Christophe Joyet, Patrick Neto
- *
  */
 public interface SMTPClient {
     public void sendMail(Mail mail) throws IOException;

@@ -7,6 +7,7 @@ import heigvd.res.labo04.model.Group;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.zip.DataFormatException;
 
 /**
@@ -29,8 +30,8 @@ public class PrankGenerator {
             throw new InvalidDataException("Not enough messages!");
 
         //Generate the list of mails
-        List<String> sendersEmails = configManager.getSendersEmails();
-        List<String> recieversEmails = configManager.getRecieversEmails();
+        List<String> sendersEmails = configManager.getSendersEmails(requiredSenders);
+        List<String> recieversEmails = configManager.getRecieversEmails(requiredRecievers);
 
         mails = new ArrayList<Prank>();
 
@@ -43,9 +44,9 @@ public class PrankGenerator {
             }
             group.setCc(new Person(DEFAULT_CC_MAIL));
 
-            System.out.println(group);
-
-            mails.add(new Prank(group, PRANK_SUBJECT, configManager.getMails().get(1)));
+            //Choose a random message in the list
+            Random rdmMail = new Random();
+            mails.add(new Prank(group, PRANK_SUBJECT, configManager.getMails().get(rdmMail.nextInt(configManager.getMails().size()))));
         }//for(String sender : sendersEmails)
     }
 
@@ -59,16 +60,4 @@ public class PrankGenerator {
         return configManager.getSmtpServerPort();
     }
     public ArrayList<Prank> getMails(){ return mails; }
-
-    public String toString(){
-        String output = "";
-        output += "Sender                       : " + configManager.getSendersEmails() + "\n";
-        output += "List of senders              : " + configManager.getRecieversEmails() + "\n";
-        output += "CC                           : " + DEFAULT_CC_MAIL + "\n";
-        output += "SMTP server address and port : " + getSmtpServerAddress() + ":" +
-                getSmtpServerPort() + "\n";
-        output += "List of mails                : " + mails;
-        return output;
-
-    }
 }

@@ -14,7 +14,6 @@ public class ConfigurationManager {
     final private String DEFAULT_CONFIG_FILENAME = "config.properties";
     final private String SENDERS_FILENAME = "senders.utf-8";
     final private String RECIEVERS_FILENAME = "recievers.utf-8";
-    final private String PATH_TO_CONFIG = "./src/heigvd/res/labo04/config/";
     private final String MESSAGES_FILENAME = "prankMessages.utf-8";
 
 
@@ -66,8 +65,6 @@ public class ConfigurationManager {
             isNotEnoughRecievers = true;
         }
 
-        System.out.println("NUmber of: " + numberOfMessages);
-
         if(numberOfMessages < numberOfSenders){
             isNotEnoughMessages = true;
         }
@@ -98,7 +95,7 @@ public class ConfigurationManager {
      * @return the count of emails found
      */
     private int countNumberOfEmails(String fileName, boolean isSenders) throws IOException{
-        File file = new File(PATH_TO_CONFIG + fileName);
+        File file = new File("config/" + fileName);
         int linesCounter = 0;
 
         try {
@@ -129,7 +126,7 @@ public class ConfigurationManager {
     }
 
     private int countMessages(String fileName) throws IOException {
-        File file = new File(PATH_TO_CONFIG + MESSAGES_FILENAME);
+        File file = new File("config/" + MESSAGES_FILENAME);
         int numberOfMessages = 0;
         //Read the message file
         try {
@@ -173,11 +170,11 @@ public class ConfigurationManager {
     public boolean getIsNotEnoughMessages() {
         return isNotEnoughMessages;
     }
-    public List<String> getSendersEmails(){
-        return sendersEmails.subList(0, numberOfSenders);
+    public List<String> getSendersEmails(int countSenders){
+        return sendersEmails.subList(0, countSenders);
     }
-    public List<String> getRecieversEmails(){
-        return recieversEmails.subList(0, numberOfRecievers);
+    public List<String> getRecieversEmails(int countRecievers){
+        return recieversEmails.subList(0, countRecievers);
     }
     public List<String> getMails(){
         return mails.subList(0, numberOfMessages);
