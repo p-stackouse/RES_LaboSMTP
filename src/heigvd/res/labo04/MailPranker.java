@@ -13,7 +13,7 @@ public class MailPranker {
 
         if(args.length == 2) {
             PrankGenerator prankGenerator = new PrankGenerator(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-            SMTPClientImpl smtpClient = new SMTPClientImpl(Integer.parseInt(prankGenerator.getSmtpServerPort()), "localhost");
+            SMTPClientImpl smtpClient = new SMTPClientImpl(Integer.parseInt(prankGenerator.getSmtpServerPort()), prankGenerator.getSmtpServerAddress());
 
             try {
                 for (Prank mail : prankGenerator.getMails())

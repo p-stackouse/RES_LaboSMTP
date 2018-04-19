@@ -22,20 +22,20 @@ public class SMTPClientImpl implements SMTPClient {
 
 
     public void sendMail(Mail mail) throws IOException{
-        Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Starting sending mail..");
+        Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining socket with address: "
+                + address + ":" + port);
         clientSocket  = new Socket(address, port);
-        Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining socket...");
         try{
             pr = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true);
             br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
-            System.out.print("Start Communication\n");
-
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Starting connection...");
             System.out.println(br.readLine());
             pr.flush();
 
             String line = "";
 
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Sending EHLO...");
             //EHLO
             pr.println(CMD_HELLO + " " + "localhost" + NEW_LINE);
             line = br.readLine();
@@ -47,13 +47,17 @@ public class SMTPClientImpl implements SMTPClient {
             }
 
             //MAIL FROM
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Sending FROM");
             pr.println(CMD_FROM + "<" + mail.getEmailAddressSender() + ">" + NEW_LINE);
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining server response...");
             line = br.readLine();
             pr.flush();
 
             //RCPT TO
             for (int i = 0; i < mail.getSizeGroup(); ++i) {
+                Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Sending TO");
                 pr.println(CMD_TO + "<" + mail.getEmailAddressReciever().get(i).getEmail() + ">" + NEW_LINE);
+                Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining server response...");
                 line = br.readLine();
                 pr.flush();
             }
@@ -67,6 +71,7 @@ public class SMTPClientImpl implements SMTPClient {
             //DATA
             pr.println(CMD_DATA + NEW_LINE);
             pr.flush();
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining server response...");
             line = br.readLine();
 
             pr.println(mail.getData() + NEW_LINE);
@@ -74,11 +79,13 @@ public class SMTPClientImpl implements SMTPClient {
 
             //END
             pr.println(CMD_END_MESSAGE + NEW_LINE);
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining server response...");
             line = br.readLine();
             pr.flush();
 
             //QUIT
             pr.println(CMD_QUIT + NEW_LINE);
+            Logger.getLogger(SMTPClientImpl.class.getName()).log(Level.INFO, "Obtaining server response...");
             line = br.readLine();
             pr.flush();
         }catch(Exception ex){
