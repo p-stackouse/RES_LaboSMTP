@@ -1,6 +1,6 @@
 # RES_Laboratory_SMTP
 
-Authors : Neto Patrick & Joyet Christophe 
+Authors : Neto Patrick & Joyet Christophe  
 Date	: 20 April 2018
 
 ## Description
