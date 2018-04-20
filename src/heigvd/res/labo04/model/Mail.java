@@ -3,11 +3,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
+/**
+ * This class implements a simple mail (group of sender/recievers, subject, data)
+ * @author Christophe Joyet, Patrick Neto
+ */
 public class Mail{
     private Group  group = new Group();
     private String subject;
     private String data;
-    private int groupSize;
 
     public Mail(){}
 
@@ -24,10 +27,6 @@ public class Mail{
         return group.getCc().getEmail();
     }
 
-    public int getSizeGroup(){
-        return groupSize;
-    }
-
     public ArrayList<Person> getEmailAddressReciever(){
         return group.getRecievers();
     }
@@ -35,11 +34,17 @@ public class Mail{
     public String getData(){
         String emailReciever = "";
         for(int i = 0; i < group.getRecievers().size(); ++i){
-            emailReciever = emailReciever + " " + group.getRecievers().get(i).getEmail();
+            emailReciever += group.getRecievers().get(i).getEmail();
+            if(i != group.getRecievers().size() - 1)
+                emailReciever += ", ";
         }
         return  "from : " + getEmailAddressSender() + "\n" +
                 "Cc : " + getCC() + "\n" +
                 "to : " + emailReciever + "\n" +
                 "subject : " + subject + "\n\n" + data;
+    }
+
+    public int getNumberOfRecievers(){
+        return group.getRecievers().size();
     }
 }

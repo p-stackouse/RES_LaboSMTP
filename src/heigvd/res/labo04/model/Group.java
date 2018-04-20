@@ -2,6 +2,10 @@ package heigvd.res.labo04.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class implements a basic mail group with sender and recievers (including cc)
+ * @author Christophe Joyet, Patrick Neto
+ */
 public class Group {
 
     private Person sender;

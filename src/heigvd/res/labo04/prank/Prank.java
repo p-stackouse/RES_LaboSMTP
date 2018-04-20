@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
+/**
+ * This class extends a basic mail class
+ * @author Christophe Joyet, Patrick Neto
+ */
 public class Prank extends Mail {
     private Group  group = new Group();
     private String subject;

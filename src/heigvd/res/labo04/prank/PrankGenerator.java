@@ -11,7 +11,8 @@ import java.util.Random;
 import java.util.zip.DataFormatException;
 
 /**
- * Created by patrickneto on 17.04.18.
+ * This class implements a generator (with a configuration) of prank mails
+ * @author Christophe Joyet, Patrick Neto
  */
 public class PrankGenerator {
     private final String PRANK_SUBJECT = "IMPORTANT: please read!";

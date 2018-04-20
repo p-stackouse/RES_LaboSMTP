@@ -1,5 +1,4 @@
 package heigvd.res.labo04.client;
-import heigvd.res.labo04.config.ConfigurationManager;
 import heigvd.res.labo04.model.Mail;
 
 import java.io.IOException;
